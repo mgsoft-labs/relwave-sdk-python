@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "avva-newsletter"
+name = "mgsoft-flow"
 version = "0.1.0"
-description = "Official Python SDK for the AVVA Newsletter API (/api/v1)."
+description = "Official Python SDK for the MGSoft Flow API (/api/v1)."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
-authors = [{ name = "AVVA" }]
-keywords = ["newsletter", "email", "transactional", "api", "sdk", "avva"]
+authors = [{ name = "MGSoft" }]
+keywords = ["mgsoft", "flow", "email", "transactional", "api", "sdk"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -32,16 +32,16 @@ dependencies = ["requests>=2.31"]
 test = ["pytest>=7.0", "responses>=0.24"]
 
 [project.urls]
-Homepage = "https://github.com/avva/avva-newsletter-python"
-Documentation = "https://github.com/avva/avva-newsletter-python#readme"
-Source = "https://github.com/avva/avva-newsletter-python"
-Issues = "https://github.com/avva/avva-newsletter-python/issues"
+Homepage = "https://mgsoft.com.tr"
+Documentation = "https://github.com/mgsoft/flow-python#readme"
+Source = "https://github.com/mgsoft/flow-python"
+Issues = "https://github.com/mgsoft/flow-python/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/newsletter"]
+packages = ["src/mgsoft_flow"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/newsletter", "tests", "README.md", "pyproject.toml"]
+include = ["src/mgsoft_flow", "tests", "README.md", "pyproject.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

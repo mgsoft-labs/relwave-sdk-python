@@ -1,11 +1,11 @@
-"""Typed exceptions for the AVVA Newsletter SDK."""
+"""Typed exceptions for the MGSoft Flow SDK."""
 
 from __future__ import annotations
 
 from typing import Dict, List, Optional
 
 __all__ = [
-    "NewsletterError",
+    "FlowError",
     "AuthenticationError",
     "PermissionError",
     "NotFoundError",
@@ -17,7 +17,7 @@ __all__ = [
 ErrorsMap = Dict[str, List[str]]
 
 
-class NewsletterError(Exception):
+class FlowError(Exception):
     """Base error raised when the API returns ``HTTP >= 400`` or a populated
     ``errors`` envelope.
 
@@ -68,29 +68,29 @@ class NewsletterError(Exception):
         errors: Optional[ErrorsMap] = None,
         retry_after: Optional[int] = None,
         meta: Optional[Dict[str, object]] = None,
-    ) -> "NewsletterError":
+    ) -> "FlowError":
         """Build the most specific error subclass for the given HTTP status."""
         error_cls = _STATUS_MAP.get(status, cls)
         return error_cls(status=status, errors=errors, retry_after=retry_after, meta=meta)
 
 
-class AuthenticationError(NewsletterError):
+class AuthenticationError(FlowError):
     """Raised on ``401`` — missing or invalid API key."""
 
 
-class PermissionError(NewsletterError):  # noqa: A001 - intentional public name
+class PermissionError(FlowError):  # noqa: A001 - intentional public name
     """Raised on ``403`` — authenticated but not allowed (e.g. suspended account)."""
 
 
-class NotFoundError(NewsletterError):
+class NotFoundError(FlowError):
     """Raised on ``404`` — the requested resource does not exist."""
 
 
-class ValidationError(NewsletterError):
+class ValidationError(FlowError):
     """Raised on ``422`` — the request body failed validation."""
 
 
-class RateLimitError(NewsletterError):
+class RateLimitError(FlowError):
     """Raised on ``429`` — too many requests. Inspect :attr:`retry_after`."""
 
 

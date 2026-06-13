@@ -1,4 +1,4 @@
-"""Synchronous client for the AVVA Newsletter ``/api/v1`` API."""
+"""Synchronous client for the MGSoft Flow ``/api/v1`` API."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import requests
 
-from .errors import NewsletterError
+from .errors import FlowError
 from .models import (
     Campaign,
     MailingList,
@@ -20,11 +20,11 @@ __all__ = ["Client"]
 
 DEFAULT_BASE_URL = "https://app.test/api/v1"
 DEFAULT_TIMEOUT = 30.0
-_USER_AGENT = "avva-newsletter-python/0.1.0"
+_USER_AGENT = "mgsoft-flow-python/0.1.0"
 
 
 class Client:
-    """Entry point for the AVVA Newsletter API.
+    """Entry point for the MGSoft Flow API.
 
     Args:
         api_key: An API key in the form ``nl_xxxxx.secret``. Keys prefixed with
@@ -91,7 +91,7 @@ class Client:
         """Issue a request and unwrap the ``{ data, meta, errors }`` envelope.
 
         Returns a ``(data, meta)`` tuple on success. Raises
-        :class:`~newsletter.errors.NewsletterError` (or a subclass) when the
+        :class:`~mgsoft_flow.errors.FlowError` (or a subclass) when the
         response has ``HTTP >= 400`` or a populated ``errors`` map.
         """
         url = f"{self.base_url}/{path.lstrip('/')}"
@@ -121,7 +121,7 @@ class Client:
         errors = _as_dict(body.get("errors"))
 
         if response.status_code >= 400 or errors:
-            raise NewsletterError.from_response(
+            raise FlowError.from_response(
                 status=response.status_code,
                 errors=_normalize_errors(errors),
                 retry_after=_parse_retry_after(response.headers.get("Retry-After")),
@@ -151,8 +151,8 @@ class SubscribersResource(_Resource):
             params: Optional query params, e.g. ``{"page": 2, "per_page": 50}``.
 
         Returns:
-            A :class:`~newsletter.models.Page` of
-            :class:`~newsletter.models.Subscriber` with ``.pagination``.
+            A :class:`~mgsoft_flow.models.Page` of
+            :class:`~mgsoft_flow.models.Subscriber` with ``.pagination``.
         """
         data, meta = self._client.request("GET", "subscribers", params=params)
         items = [Subscriber.from_dict(row) for row in (data or [])]

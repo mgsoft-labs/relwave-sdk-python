@@ -1,11 +1,11 @@
-# avva-newsletter
+# mgsoft-flow
 
-Official Python SDK for the **AVVA Newsletter** API (`/api/v1`). Send
+Official Python SDK for the **MGSoft Flow** API (`/api/v1`). Send
 transactional email, manage subscribers, and read your lists and campaigns —
 with a typed, idiomatic, envelope-aware client.
 
-- PyPI package: **`avva-newsletter`**
-- Import package: **`newsletter`**
+- PyPI package: **`mgsoft-flow`**
+- Import package: **`mgsoft_flow`**
 - Python **3.9+**, built on [`requests`](https://pypi.org/project/requests/)
 
 ## Installation
@@ -13,13 +13,13 @@ with a typed, idiomatic, envelope-aware client.
 > **Yakında.** Paket henüz PyPI'a yayınlanmadı; aşağıdaki komut yayın sonrası geçerli olacak.
 
 ```bash
-pip install avva-newsletter
+pip install mgsoft-flow
 ```
 
 ## Quickstart
 
 ```python
-from newsletter import Client
+from mgsoft_flow import Client
 
 client = Client(
     api_key="nl_live_xxxxx.secret",
@@ -115,12 +115,12 @@ client.messages.send({
 The API returns a `{ data, meta, errors }` envelope. On success the SDK returns
 the deserialized `data` (and exposes `meta` for paginated lists). When the
 response has `HTTP >= 400` or a populated `errors` map, the SDK raises a typed
-`NewsletterError` (or a subclass) carrying the `status` and an `errors`
+`FlowError` (or a subclass) carrying the `status` and an `errors`
 mapping of `field -> [messages]`.
 
 ```python
-from newsletter import (
-    NewsletterError,
+from mgsoft_flow import (
+    FlowError,
     AuthenticationError,   # 401
     PermissionError,       # 403
     NotFoundError,         # 404
@@ -134,7 +134,7 @@ except ValidationError as err:
     print(err.status)            # 422
     print(err.errors)            # {"email": ["The email field is required."]}
     print(err.first_message)     # "The email field is required."
-except NewsletterError as err:
+except FlowError as err:
     # Catch-all base for any API error
     print(err.status, err.errors)
 ```
@@ -146,7 +146,7 @@ On `429 Too Many Requests`, the SDK raises `RateLimitError` and surfaces the
 
 ```python
 import time
-from newsletter import RateLimitError
+from mgsoft_flow import RateLimitError
 
 try:
     client.messages.send({"to": "u@example.com", "subject": "Hi", "text": "yo"})

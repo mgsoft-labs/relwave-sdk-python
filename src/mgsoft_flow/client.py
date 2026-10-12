@@ -221,7 +221,10 @@ class MessagesResource(_Resource):
         Args:
             body: Must include ``to``, ``subject`` and at least one of ``html``
                 / ``text``. Optional: ``from``, ``from_name``, ``reply_to``,
-                ``stream_id``, ``variables``, ``metadata``, ``tags`` (<= 10).
+                ``stream_id``, ``variables``, ``metadata``, ``tags`` (<= 10),
+                ``markdown``, ``template_id`` and ``attachments`` — a list of
+                ``{"filename", "content" (base64), "content_type"?}``, up to 10
+                files / 10 MB in total.
             idempotency_key: Optional ``X-Idempotency-Key`` value.
         """
         data, _ = self._client.request(

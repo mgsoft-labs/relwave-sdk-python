@@ -110,6 +110,26 @@ client.messages.send({
 })
 ```
 
+### Attachments and templates
+
+```python
+import base64
+
+with open("invoice.pdf", "rb") as f:
+    pdf = base64.b64encode(f.read()).decode()
+
+client.messages.send({
+    "to": "jane@example.com",
+    "subject": "Your invoice",
+    "template_id": 12,  # the body fills the template's {{content}} slot
+    "markdown": "Thanks for your order, **{{ first_name }}**.",
+    "variables": {"first_name": "Jane"},
+    "attachments": [{"filename": "invoice.pdf", "content": pdf}],
+})
+```
+
+Up to 10 files, 10 MB in total. Executable and script types are rejected.
+
 ## Error handling
 
 The API returns a `{ data, meta, errors }` envelope. On success the SDK returns

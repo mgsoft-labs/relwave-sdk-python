@@ -1,8 +1,8 @@
-"""MGSoft Flow — official Python SDK for the ``/api/v1`` API.
+"""Relwave — official Python SDK for the ``/api/v1`` API.
 
 Quickstart::
 
-    from mgsoft_flow import Client
+    from relwave import Client
 
     client = Client(
         api_key="nl_live_xxxxx.secret",
@@ -18,7 +18,7 @@ Quickstart::
 from .client import Client
 from .errors import (
     AuthenticationError,
-    FlowError,
+    RelwaveError,
     NotFoundError,
     PermissionError,
     RateLimitError,
@@ -38,7 +38,7 @@ __version__ = "0.1.0"
 
 __all__ = [
     "Client",
-    "FlowError",
+    "RelwaveError",
     "AuthenticationError",
     "PermissionError",
     "NotFoundError",

@@ -1,4 +1,4 @@
-"""Data models mirroring the MGSoft Flow ``/api/v1`` response shapes.
+"""Data models mirroring the Relwave ``/api/v1`` response shapes.
 
 Each dataclass exposes a :meth:`from_dict` constructor that tolerates extra
 keys and missing optional fields, so forward-compatible API additions never

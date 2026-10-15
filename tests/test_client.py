@@ -1,4 +1,4 @@
-"""Offline tests for the MGSoft Flow SDK using the ``responses`` library.
+"""Offline tests for the Relwave SDK using the ``responses`` library.
 
 No real network access happens; every HTTP call is mocked.
 """
@@ -6,9 +6,9 @@ No real network access happens; every HTTP call is mocked.
 import pytest
 import responses
 
-from mgsoft_flow import (
+from relwave import (
     Client,
-    FlowError,
+    RelwaveError,
     RateLimitError,
     ValidationError,
 )
@@ -116,7 +116,7 @@ def test_create_subscriber_422_raises_validation_error():
         client.subscribers.create({"first_name": "NoEmail"})
 
     err = exc_info.value
-    assert isinstance(err, FlowError)
+    assert isinstance(err, RelwaveError)
     assert err.status == 422
     assert err.errors["email"] == ["The email field is required."]
     assert err.first_message == "The email field is required."

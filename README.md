@@ -1,11 +1,11 @@
-# mgsoft-flow
+# relwave
 
-Official Python SDK for the **MGSoft Flow** API (`/api/v1`). Send
+Official Python SDK for the **Relwave** API (`/api/v1`). Send
 transactional email, manage subscribers, and read your lists and campaigns —
 with a typed, idiomatic, envelope-aware client.
 
-- PyPI package: **`mgsoft-flow`**
-- Import package: **`mgsoft_flow`**
+- PyPI package: **`relwave`**
+- Import package: **`relwave`**
 - Python **3.9+**, built on [`requests`](https://pypi.org/project/requests/)
 
 ## Installation
@@ -13,13 +13,13 @@ with a typed, idiomatic, envelope-aware client.
 > **Yakında.** Paket henüz PyPI'a yayınlanmadı; aşağıdaki komut yayın sonrası geçerli olacak.
 
 ```bash
-pip install mgsoft-flow
+pip install relwave
 ```
 
 ## Quickstart
 
 ```python
-from mgsoft_flow import Client
+from relwave import Client
 
 client = Client(
     api_key="nl_live_xxxxx.secret",
@@ -135,12 +135,12 @@ Up to 10 files, 10 MB in total. Executable and script types are rejected.
 The API returns a `{ data, meta, errors }` envelope. On success the SDK returns
 the deserialized `data` (and exposes `meta` for paginated lists). When the
 response has `HTTP >= 400` or a populated `errors` map, the SDK raises a typed
-`FlowError` (or a subclass) carrying the `status` and an `errors`
+`RelwaveError` (or a subclass) carrying the `status` and an `errors`
 mapping of `field -> [messages]`.
 
 ```python
-from mgsoft_flow import (
-    FlowError,
+from relwave import (
+    RelwaveError,
     AuthenticationError,   # 401
     PermissionError,       # 403
     NotFoundError,         # 404
@@ -154,7 +154,7 @@ except ValidationError as err:
     print(err.status)            # 422
     print(err.errors)            # {"email": ["The email field is required."]}
     print(err.first_message)     # "The email field is required."
-except FlowError as err:
+except RelwaveError as err:
     # Catch-all base for any API error
     print(err.status, err.errors)
 ```
@@ -166,7 +166,7 @@ On `429 Too Many Requests`, the SDK raises `RateLimitError` and surfaces the
 
 ```python
 import time
-from mgsoft_flow import RateLimitError
+from relwave import RateLimitError
 
 try:
     client.messages.send({"to": "u@example.com", "subject": "Hi", "text": "yo"})

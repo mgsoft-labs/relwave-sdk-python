@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mgsoft-flow"
+name = "relwave"
 version = "0.1.0"
-description = "Official Python SDK for the MGSoft Flow API (/api/v1)."
+description = "Official Python SDK for the Relwave API (/api/v1)."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "MGSoft" }]
-keywords = ["mgsoft", "flow", "email", "transactional", "api", "sdk"]
+keywords = ["relwave", "email", "transactional", "api", "sdk"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -32,16 +32,14 @@ dependencies = ["requests>=2.31"]
 test = ["pytest>=7.0", "responses>=0.24"]
 
 [project.urls]
-Homepage = "https://mgsoft.com.tr"
-Documentation = "https://github.com/mgsoft/flow-python#readme"
-Source = "https://github.com/mgsoft/flow-python"
-Issues = "https://github.com/mgsoft/flow-python/issues"
+Homepage = "https://relwave.com"
+Documentation = "https://relwave.com/docs/api"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/mgsoft_flow"]
+packages = ["src/relwave"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/mgsoft_flow", "tests", "README.md", "pyproject.toml"]
+include = ["src/relwave", "tests", "README.md", "pyproject.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

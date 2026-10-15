@@ -9,7 +9,7 @@ description = "Official Python SDK for the Relwave API (/api/v1)."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
-authors = [{ name = "MGSoft" }]
+authors = [{ name = "mgsoft" }]
 keywords = ["relwave", "email", "transactional", "api", "sdk"]
 classifiers = [
     "Development Status :: 4 - Beta",

@@ -10,6 +10,7 @@ from .errors import RelwaveError
 from .models import (
     Campaign,
     MailingList,
+    Me,
     Message,
     Page,
     Pagination,
@@ -18,9 +19,9 @@ from .models import (
 
 __all__ = ["Client"]
 
-DEFAULT_BASE_URL = "https://app.test/api/v1"
+DEFAULT_BASE_URL = "https://relwave.com/api/v1"
 DEFAULT_TIMEOUT = 30.0
-_USER_AGENT = "relwave-python/0.1.0"
+_USER_AGENT = "relwave-python/1.0.0"
 
 
 class Client:
@@ -59,6 +60,11 @@ class Client:
         self.lists = ListsResource(self)
         self.campaigns = CampaignsResource(self)
         self.messages = MessagesResource(self)
+
+    def me(self) -> Me:
+        """The account that owns this API key; handy as a connection test."""
+        data, _ = self.request("GET", "me")
+        return Me.from_dict(_as_dict(data))
 
     @property
     def is_sandbox(self) -> bool:

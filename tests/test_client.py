@@ -21,6 +21,23 @@ def make_client() -> Client:
 
 
 @responses.activate
+def test_me_returns_the_account_for_the_key():
+    responses.add(
+        responses.GET,
+        f"{BASE_URL}/me",
+        json={"data": {"account": {"slug": "acme", "name": "Acme"}, "sandbox": True}, "meta": {}, "errors": {}},
+    )
+
+    me = make_client().me()
+
+    assert (me.account_slug, me.account_name, me.sandbox) == ("acme", "Acme", True)
+
+
+def test_defaults_to_the_production_api():
+    assert Client(api_key="nl_abc.secret").base_url == "https://relwave.com/api/v1"
+
+
+@responses.activate
 def test_send_message_returns_message_and_sets_auth_header():
     responses.add(
         responses.POST,

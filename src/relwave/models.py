@@ -32,6 +32,7 @@ class Subscriber:
     engagement_tier: Optional[str] = None
     created_at: Optional[str] = None
     unsubscribed_at: Optional[str] = None
+    sandbox: bool = False
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Subscriber":
@@ -45,6 +46,25 @@ class Subscriber:
             engagement_tier=data.get("engagement_tier"),
             created_at=data.get("created_at"),
             unsubscribed_at=data.get("unsubscribed_at"),
+            sandbox=bool(data.get("sandbox", False)),
+        )
+
+
+@dataclass
+class Me:
+    """The account that owns the API key."""
+
+    account_slug: str
+    account_name: str
+    sandbox: bool = False
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "Me":
+        account = data.get("account") or {}
+        return cls(
+            account_slug=account.get("slug", ""),
+            account_name=account.get("name", ""),
+            sandbox=bool(data.get("sandbox", False)),
         )
 
 
@@ -114,6 +134,7 @@ class Message:
     sent_at: Optional[str] = None
     delivered_at: Optional[str] = None
     failure_reason: Optional[str] = None
+    sandbox: bool = False
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Message":
@@ -128,6 +149,7 @@ class Message:
             sent_at=data.get("sent_at"),
             delivered_at=data.get("delivered_at"),
             failure_reason=data.get("failure_reason"),
+            sandbox=bool(data.get("sandbox", False)),
         )
 
 

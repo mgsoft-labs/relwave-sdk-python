@@ -51,7 +51,7 @@ client = Client(api_key="nl_live_xxxxx.secret",
                 base_url="https://app.example.com/api/v1")
 ```
 
-The `base_url` defaults to `https://app.test/api/v1` for local development;
+The `base_url` defaults to `https://relwave.com/api/v1`;
 set it to your application's `/api/v1` URL in production.
 
 ## Subscribers

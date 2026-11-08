@@ -27,6 +27,7 @@ from .errors import (
 from .models import (
     Campaign,
     MailingList,
+    Me,
     Message,
     Page,
     Pagination,
@@ -34,7 +35,7 @@ from .models import (
     Subscriber,
 )
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 
 __all__ = [
     "Client",
@@ -46,6 +47,7 @@ __all__ = [
     "RateLimitError",
     "Subscriber",
     "MailingList",
+    "Me",
     "Campaign",
     "Stream",
     "Message",

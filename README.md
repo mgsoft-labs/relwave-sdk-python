@@ -10,8 +10,6 @@ with a typed, idiomatic, envelope-aware client.
 
 ## Installation
 
-> **Yakında.** Paket henüz PyPI'a yayınlanmadı; aşağıdaki komut yayın sonrası geçerli olacak.
-
 ```bash
 pip install relwave
 ```
